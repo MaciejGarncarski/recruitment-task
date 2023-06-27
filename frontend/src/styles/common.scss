@@ -1,0 +1,21 @@
+%inputCommon {
+    height: 100%;
+    width: 100%;
+    padding: 1em 0.75em;
+    padding-top: 1.5em;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--clr-accent);
+    background-color: var(--clr-secondary);
+    border-radius: var(--radius);
+
+    &:focus {
+        outline-offset: 6px;
+    }
+}
+
+%labelActive {
+    &:focus+.label {
+        transform: translate(0.75em, 0.15em);
+        font-size: 0.8em;
+    }
+}

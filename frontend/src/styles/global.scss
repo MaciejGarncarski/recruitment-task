@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-family: 'Inter Variable', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --clr-primary: #060809;
+  --clr-secondary: #ffffff;
+  --clr-button-primary: #363953;
+  --clr-button-secondary: #f2f0f5;
+  --clr-accent: #110e16;
+  --clr-error: #be1e1e;
+
+
+  --shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+  --transition: ease 0.25s;
+
+  --radius: 0.25em;
+}
+
+body {
+  color: var(--clr-primary);
+  background-color: var(--clr-secondary);
+  padding: 2rem;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+button,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}

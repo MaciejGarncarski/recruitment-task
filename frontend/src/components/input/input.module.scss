@@ -1,0 +1,30 @@
+@use '/src/styles/common.scss';
+
+.container {
+    width: 100%;
+}
+
+.inputContainer {
+    position: relative;
+}
+
+.label {
+    transform: translate(0.75em, 0.85em);
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: all var(--transition);
+    transition-property: transform, font-size;
+}
+
+
+.input {
+    @extend %inputCommon;
+    @extend %labelActive;
+}
+
+.labelActive {
+    transform: translate(0.75em, 0.15em);
+    font-size: 0.8em;
+}

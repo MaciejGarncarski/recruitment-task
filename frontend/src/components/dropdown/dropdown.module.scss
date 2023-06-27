@@ -1,0 +1,56 @@
+.container {
+    width: 100%;
+}
+
+.mainButton {
+    border-radius: var(--radius);
+    width: 100%;
+    text-align: left;
+    padding: 1em 0.75em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--clr-accent);
+    background-color: var(--clr-secondary);
+    box-shadow: var(--shadow);
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.list {
+    list-style-type: none;
+    width: 100%;
+    background-color: var(--clr-secondary);
+    margin-top: 0.25rem;
+    border-radius: var(--radius);
+    max-height: 8rem;
+    overflow-y: auto;
+    box-shadow: var(--shadow);
+}
+
+.listItem {
+    width: 100%;
+}
+
+.listItemButton {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    padding: 1rem;
+    text-align: left;
+    transition: all var(--transition);
+    transition-property: color, background-color;
+
+    &:hover {
+        cursor: pointer;
+        color: var(--clr-secondary);
+        background-color: var(--clr-accent);
+    }
+
+    &:focus {
+        color: var(--clr-secondary);
+        background-color: var(--clr-accent);
+    }
+}
