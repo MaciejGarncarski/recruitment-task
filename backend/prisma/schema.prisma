@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./database.db"
+}
+
+model Streamer {
+  streamer_id Int    @id @default(autoincrement())
+  name        String @unique
+  description String
+  platform    String
+  votes       Vote[]
+}
+
+model Vote {
+  vote_id     Int      @id @default(autoincrement())
+  streamer    Streamer @relation(fields: [streamer_id], references: [streamer_id])
+  streamer_id Int
+}
