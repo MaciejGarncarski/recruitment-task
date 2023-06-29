@@ -3,6 +3,8 @@ import type { Request, Response } from "express";
 
 import { getSingleStreamerInputSchema } from "./single-streamer.schema";
 import { getStreamer } from "./single-streamer.service";
+import { httpCodes } from "../consts/http-codes";
+import { getZodErrorMessage } from "../utils/error";
 
 export const getSingleStreamerHandler = async (
   { params }: Request,
@@ -12,23 +14,24 @@ export const getSingleStreamerHandler = async (
 
   if (!requestData.success) {
     return res
-      .status(400)
-      .send(`Cannot get streamer data ${requestData.error.issues[0].message}`);
+      .status(httpCodes.BAD_REQUEST)
+      .send(`Cannot get streamer data ${getZodErrorMessage(requestData)}`);
   }
 
   try {
     const streamerData = await getStreamer({
       streamerId: requestData.data.streamerId
     });
-    return res.status(200).send(streamerData);
+    return res.status(httpCodes.SUCCESS).send(streamerData);
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2025") {
         return res
-          .status(404)
+          .status(httpCodes.NOT_FOUND)
           .send(`Streamer with id=${requestData.data.streamerId} not found.`);
       }
     }
-    return res.status(400).send("Bad request.");
+
+    return res.status(httpCodes.BAD_REQUEST).send("Bad request.");
   }
 };

@@ -19,4 +19,5 @@ model Vote {
   vote_id     Int      @id @default(autoincrement())
   streamer    Streamer @relation(fields: [streamer_id], references: [streamer_id])
   streamer_id Int
+  type String
 }

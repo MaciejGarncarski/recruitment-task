@@ -1,3 +1,5 @@
+import type { SafeParseError } from "zod";
+
 type ErrorWithMessage = {
   message: string;
 };
@@ -23,4 +25,8 @@ const toErrorWithMessage = (maybeError: unknown): ErrorWithMessage => {
 
 export const getErrorMessage = (error: unknown) => {
   return toErrorWithMessage(error).message;
+};
+
+export const getZodErrorMessage = <T>(parsedData: SafeParseError<T>) => {
+  return parsedData.error.issues[0].message;
 };
