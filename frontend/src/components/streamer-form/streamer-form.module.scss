@@ -1,0 +1,62 @@
+@use '/src/styles/mediaqueries.scss';
+
+.container {
+    min-height: 50vh;
+    min-height: 50dvh;
+    position: absolute;
+    left: 0;
+    z-index: 2;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(16rem, 90vw, 40rem);
+    margin: auto;
+    padding: 1em;
+    border-radius: 0.5em;
+    box-shadow: var(--shadow);
+    background-color: var(--clr-secondary);
+    border: 1px solid var(--clr-border);
+
+    @include mediaqueries.xl {
+        padding: 2em;
+    }
+}
+
+.header {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.heading {
+    line-height: 1;
+    font-size: 2rem;
+}
+
+
+.closeButton {
+    margin-left: auto;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+
+    @include mediaqueries.xl {
+        gap: 2rem;
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    @include mediaqueries.xl {
+        gap: 5rem;
+    }
+}

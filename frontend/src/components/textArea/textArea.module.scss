@@ -1,11 +1,22 @@
 @use '/src/styles/common.scss';
 
+
+.label {
+    transform: translate(0.75em, 1.2em);
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: all var(--transition);
+    transition-property: transform, font-size;
+}
+
+
 .textArea {
     @extend %inputCommon;
     max-height: 8rem;
     resize: vertical;
     font-family: inherit;
-
     @extend %labelActive;
 }
 
@@ -15,16 +26,6 @@
 
 .textAreaContainer {
     position: relative;
-}
-
-.label {
-    transform: translate(0.75em, 0.85em);
-    display: inline-block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    transition: all var(--transition);
-    transition-property: transform, font-size;
 }
 
 .labelActive {

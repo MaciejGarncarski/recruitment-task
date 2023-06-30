@@ -4,7 +4,7 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:react-hooks/recommended",
+    "plugin:react-hooks/recommended"
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: { ecmaVersion: "latest", sourceType: "module" },
@@ -12,10 +12,11 @@ module.exports = {
     "react-refresh",
     "@typescript-eslint",
     "simple-import-sort",
-    "unused-imports",
+    "unused-imports"
   ],
   rules: {
     "react-refresh/only-export-components": "warn",
+    "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/consistent-type-imports": "error",
     "no-console": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -26,8 +27,8 @@ module.exports = {
         vars: "all",
         varsIgnorePattern: "^_",
         args: "after-used",
-        argsIgnorePattern: "^_",
-      },
+        argsIgnorePattern: "^_"
+      }
     ],
     "simple-import-sort/exports": "warn",
     "simple-import-sort/imports": [
@@ -46,11 +47,11 @@ module.exports = {
             "^\\.\\./\\.\\./?$",
             "^\\.\\./\\.\\.(?!/?$)",
             "^\\.\\./\\.\\./\\.\\./?$",
-            "^\\.\\./\\.\\./\\.\\.(?!/?$)",
+            "^\\.\\./\\.\\./\\.\\.(?!/?$)"
           ],
-          ["^@/src/types"],
-        ],
-      },
-    ],
-  },
+          ["^@/src/types"]
+        ]
+      }
+    ]
+  }
 };

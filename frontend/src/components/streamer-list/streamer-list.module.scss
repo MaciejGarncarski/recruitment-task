@@ -1,0 +1,59 @@
+@use '/src/styles/mediaqueries.scss';
+
+
+
+.container {
+    margin: auto;
+    margin-top: 2rem;
+    max-width: 40rem;
+
+    @include mediaqueries.xl {
+        margin-top: 4rem;
+    }
+}
+
+.list {
+    list-style-type: none;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.link {
+    border-radius: var(--radius);
+    padding: 1rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    color: var(--clr-primary);
+    border: 1px solid var(--clr-border);
+    background-color: var(--clr-secondary);
+    font-size: 1.5rem;
+    transition: all var(--transition);
+    transition-property: box-shadow, border-color;
+
+    &:hover,
+    &:focus {
+        box-shadow: 0 5px 0 0 var(--clr-accent);
+        border-color: var(--clr-accent);
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.image {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: var(--radius);
+}
+
+.icon {
+    margin-left: auto;
+}

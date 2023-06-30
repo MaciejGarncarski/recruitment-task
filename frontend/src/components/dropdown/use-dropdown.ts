@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useClickOutside } from "@/hooks/useClickOutside";
+import { useClickOutside } from "@/hooks/use-click-outside";
 
 export const useDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);

@@ -3,11 +3,11 @@ import type { Variants } from "framer-motion";
 export const variants: Variants = {
   hidden: {
     opacity: 0,
-    top: -100
+    top: "60%"
   },
   exit: {
     opacity: 0,
-    top: 100
+    top: "50%"
   },
   visible: {
     opacity: 1,
@@ -16,9 +16,9 @@ export const variants: Variants = {
 };
 
 export const dropdownData = [
-  { value: "twitch", text: "Twitch" },
-  { value: "youtube", text: "YouTube" },
-  { value: "tiktok", text: "TikTok" },
-  { value: "kick", text: "Kick" },
-  { value: "rumble", text: "Rumble" }
+  { value: "Twitch", text: "Twitch" },
+  { value: "YouTube", text: "YouTube" },
+  { value: "TikTok", text: "TikTok" },
+  { value: "Kick", text: "Kick" },
+  { value: "Rumble", text: "Rumble" }
 ];

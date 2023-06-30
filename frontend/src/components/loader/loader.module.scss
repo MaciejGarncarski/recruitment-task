@@ -1,0 +1,22 @@
+.loaderContainer {
+    padding: 3rem;
+    width: max-content;
+    margin: auto;
+}
+
+.loader {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    border: 1rem solid transparent;
+    border-color: var(--clr-secondary);
+    border-right-color: var(--clr-accent);
+    animation: rotation 1s infinite linear;
+}
+
+
+@keyframes rotation {
+    to {
+        transform: rotate(1turn)
+    }
+}

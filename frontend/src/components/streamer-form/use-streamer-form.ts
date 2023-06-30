@@ -1,6 +1,19 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { MouseEvent } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+export const platformSchema = z.union([
+  z.literal("YouTube", {
+    errorMap: () => ({ message: "Please choose platform" })
+  }),
+  z.literal("Twitch"),
+  z.literal("Kick"),
+  z.literal("Rumble"),
+  z.literal("TikTok")
+]);
+
+export type Platform = z.infer<typeof platformSchema>;
 
 const formSchema = z.object({
   name: z
@@ -11,20 +24,16 @@ const formSchema = z.object({
     .string()
     .min(1, { message: "Description is too short" })
     .max(250, { message: "Description is too long" }),
-  platform: z.object({
-    text: z.string().min(1, { message: "Platform must not be empty" }),
-    value: z.string().min(1, { message: "Platform must not be empty" })
-  })
+  platform: platformSchema
 });
 
 export type FormValues = z.infer<typeof formSchema>;
 
 export const useStreamerForm = () => {
   const {
-    setValue,
     register,
-    formState: { errors, dirtyFields },
-    resetField,
+    formState: { errors, defaultValues },
+    reset,
     watch,
     handleSubmit
   } = useForm<FormValues>({
@@ -33,19 +42,28 @@ export const useStreamerForm = () => {
     defaultValues: {
       name: "",
       description: "",
-      platform: {
-        text: "",
-        value: ""
-      }
+      platform: undefined
     }
   });
+
+  const isFieldDirty = (key: keyof FormValues) => {
+    if (!defaultValues) {
+      return false;
+    }
+
+    return watch()[key] !== defaultValues[key];
+  };
+
+  const handleReset = (ev: MouseEvent) => {
+    ev.preventDefault();
+    reset();
+  };
 
   return {
     watch,
     errors,
-    dirtyFields,
-    setValue,
-    resetField,
+    isFieldDirty,
+    handleReset,
     register,
     handleSubmit
   };

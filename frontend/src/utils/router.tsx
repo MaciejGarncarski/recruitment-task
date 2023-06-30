@@ -1,17 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import { Layout } from "@/routes/layout";
 import { Root } from "@/routes/root";
-import { StreamerRecord } from "@/routes/streamer-record";
+import { StreamerRecordPage } from "@/routes/streamer-record-page";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <Layout />,
+
     children: [
+      { path: "/", element: <Root /> },
       {
         path: "streamer/:streamerId",
-        element: <StreamerRecord />,
-      },
-    ],
-  },
+        element: <StreamerRecordPage />
+      }
+    ]
+  }
 ]);

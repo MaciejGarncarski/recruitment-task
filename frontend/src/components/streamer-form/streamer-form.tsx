@@ -1,38 +1,29 @@
 import { motion } from "framer-motion";
 import { Check, Trash, X } from "lucide-react";
 
-import {
-  dropdownData,
-  variants
-} from "@/components/add-streamer-form/add-streamer-form.data";
-import { useStreamerForm } from "@/components/add-streamer-form/useStreamerForm";
 import { Button } from "@/components/button/button";
 import { Dropdown } from "@/components/dropdown/dropdown";
 import { Input } from "@/components/input/input";
+import {
+  dropdownData,
+  variants
+} from "@/components/streamer-form/streamer-form.data";
+import { useStreamerForm } from "@/components/streamer-form/use-streamer-form";
 import { TextArea } from "@/components/textArea/textArea";
+import { useAddNewStreamer } from "@/hooks/use-add-new-streamer";
 
-import styles from "./add-streamer-form.module.scss";
+import styles from "./streamer-form.module.scss";
 
 type Props = {
   closeForm: () => void;
 };
 
-export const AddStreamerForm = ({ closeForm }: Props) => {
-  const {
-    dirtyFields,
-    errors,
-    register,
-    resetField,
-    setValue,
-    watch,
-    handleSubmit
-  } = useStreamerForm();
+export const StreamerForm = ({ closeForm }: Props) => {
+  const { errors, register, handleReset, watch, isFieldDirty, handleSubmit } =
+    useStreamerForm();
 
-  const resetPlatform = () => resetField("platform");
-
-  const onSubmit = handleSubmit(({ description, name, platform }) => {
-    console.log(platform, name, description);
-  });
+  const { mutate: addNewStreamer } = useAddNewStreamer();
+  const onSubmit = handleSubmit((streamerData) => addNewStreamer(streamerData));
 
   return (
     <motion.div
@@ -41,44 +32,45 @@ export const AddStreamerForm = ({ closeForm }: Props) => {
       exit="exit"
       animate="visible"
       className={styles.container}>
-      <div className={styles.closeButton}>
-        <Button
-          variant="primary"
-          text="close form"
-          type="button"
-          icon={<X />}
-          iconOnly
-          onClick={closeForm}
-        />
+      <div className={styles.header}>
+        <h2 className={styles.heading}>Add a new streamer</h2>
+        <div className={styles.closeButton}>
+          <Button
+            variant="primary"
+            text="close form"
+            type="button"
+            icon={<X />}
+            iconOnly
+            onClick={closeForm}
+          />
+        </div>
       </div>
-      <h2 className={styles.heading}>Add a new streamer</h2>
       <form onSubmit={onSubmit} className={styles.form}>
         <Input
           type="text"
           label="Streamer's name"
-          {...register("name")}
           error={errors.name}
-          isDirty={dirtyFields.name}
+          isDirty={isFieldDirty("name")}
+          {...register("name")}
         />
         <Dropdown
-          {...register("platform")}
           data={dropdownData}
-          setValue={setValue}
           inputValue={watch().platform}
-          error={errors.platform?.value}
+          error={errors.platform}
+          {...register("platform")}
         />
         <TextArea
           label="Streamer's description"
-          {...register("description")}
           error={errors.description}
-          isDirty={dirtyFields.description}
+          isDirty={isFieldDirty("description")}
+          {...register("description")}
         />
         <div className={styles.buttons}>
           <Button
             variant="secondary"
             text="Reset"
+            onClick={handleReset}
             type="reset"
-            onClick={resetPlatform}
             icon={<Trash />}
           />
           <Button

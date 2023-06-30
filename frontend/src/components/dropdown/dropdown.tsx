@@ -1,11 +1,11 @@
+import clsx from "clsx";
 import type { Variants } from "framer-motion";
 import { motion } from "framer-motion";
 import { ChevronsUpDown } from "lucide-react";
 import { forwardRef } from "react";
-import type { FieldError, UseFormSetValue } from "react-hook-form";
+import type { FieldError } from "react-hook-form";
 
-import type { FormValues } from "@/components/add-streamer-form/useStreamerForm";
-import { useDropdown } from "@/components/dropdown/useDropdown";
+import { useDropdown } from "@/components/dropdown/use-dropdown";
 import { InputError } from "@/components/inputError/inputError";
 
 import styles from "./dropdown.module.scss";
@@ -17,24 +17,23 @@ const variants: Variants = {
   },
   visible: {
     opacity: 1,
-    top: 0
+    top: "4rem"
   }
 };
 
-type Platform = {
+type DropdownData = {
   text: string;
   value: string;
 };
 
 type Props = {
-  setValue: UseFormSetValue<FormValues>;
   error?: FieldError;
-  inputValue: Platform;
-  data: Array<Platform>;
+  inputValue: string;
+  data: Array<DropdownData>;
 };
 
 export const Dropdown = forwardRef<HTMLInputElement, Props>(
-  ({ setValue, inputValue, error, data, ...rest }, ref) => {
+  ({ inputValue, error, data, ...rest }, ref) => {
     const {
       ref: dropdownRef,
       isOpen,
@@ -42,21 +41,15 @@ export const Dropdown = forwardRef<HTMLInputElement, Props>(
       closeDropdown
     } = useDropdown();
 
+    const selectedText = data.find(({ value }) => value === inputValue);
+
     return (
       <div className={styles.container} ref={dropdownRef}>
-        <input
-          type="text"
-          className="visually-hidden"
-          aria-hidden="true"
-          tabIndex={-1}
-          {...rest}
-          ref={ref}
-        />
         <button
           onClick={toggleDropdown}
           type="button"
           className={styles.mainButton}>
-          {inputValue.value ? inputValue.text : "Choose platform"}
+          {inputValue ? selectedText?.text : "Choose platform"}
           <ChevronsUpDown />
         </button>
 
@@ -67,17 +60,27 @@ export const Dropdown = forwardRef<HTMLInputElement, Props>(
             initial="hidden"
             className={styles.list}>
             {data.map(({ text, value }) => {
+              const isActive = inputValue === value;
+
               return (
                 <li key={value} className={styles.listItem}>
-                  <button
-                    type="button"
-                    className={styles.listItemButton}
-                    onClick={() => {
-                      setTimeout(closeDropdown);
-                      setValue("platform", { text, value });
-                    }}>
+                  <input
+                    className={styles.input}
+                    type="radio"
+                    id={value}
+                    {...rest}
+                    value={value}
+                    ref={ref}
+                  />
+                  <label
+                    htmlFor={value}
+                    className={clsx(
+                      isActive && styles.labelActive,
+                      styles.label
+                    )}
+                    onClick={() => setTimeout(closeDropdown)}>
                     {text}
-                  </button>
+                  </label>
                 </li>
               );
             })}
@@ -88,3 +91,7 @@ export const Dropdown = forwardRef<HTMLInputElement, Props>(
     );
   }
 );
+// onClick={() => {
+//   setTimeout(closeDropdown);
+//   setValue("platform", { text, value });
+// }}>

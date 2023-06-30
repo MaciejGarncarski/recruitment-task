@@ -2,20 +2,27 @@ import { AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 
-import { AddStreamerForm } from "@/components/add-streamer-form/add-streamer-form";
 import { Button } from "@/components/button/button";
-import { useClickOutside } from "@/hooks/useClickOutside";
+import { StreamerForm } from "@/components/streamer-form/streamer-form";
+import { useClickOutside } from "@/hooks/use-click-outside";
 
 import styles from "./add-streamer.module.scss";
 
 export const AddStreamer = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
-  const openForm = () => setIsFormOpen(true);
   const closeForm = () => {
+    setIsFormOpen(false);
+    document.body.classList.remove("lock");
+  };
+  const openForm = () => {
+    setIsFormOpen((prev) => !prev);
     if (isFormOpen) {
-      setIsFormOpen(false);
+      document.body.classList.remove("lock");
+      return;
     }
+
+    document.body.classList.add("lock");
   };
 
   const { ref } = useClickOutside(closeForm);
@@ -29,8 +36,11 @@ export const AddStreamer = () => {
         type="button"
         onClick={openForm}
       />
+
       <AnimatePresence mode="wait">
-        {isFormOpen && <AddStreamerForm closeForm={closeForm} />}
+        <div className={styles.overlay}>
+          {isFormOpen && <StreamerForm closeForm={closeForm} />}
+        </div>
       </AnimatePresence>
     </main>
   );

@@ -1,3 +1,5 @@
+@use '/src/styles/mediaqueries.scss';
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,25 +16,40 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --clr-primary: #060809;
-  --clr-secondary: #ffffff;
-  --clr-button-primary: #363953;
-  --clr-button-secondary: #f2f0f5;
-  --clr-accent: #110e16;
-  --clr-error: #be1e1e;
+  --clr-primary: rgb(6, 8, 9);
+  --clr-secondary: rgb(250, 250, 250);
+  --clr-accent: rgb(55, 58, 83);
+  --clr-accent-lighter: rgb(90, 90, 130);
+  --clr-error: rgb(200, 10, 10);
 
-
+  --clr-border: rgba(6, 8, 9, 0.3);
   --shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 
   --transition: ease 0.25s;
 
-  --radius: 0.25em;
+  --radius: 0.3rem;
 }
 
 body {
   color: var(--clr-primary);
-  background-color: var(--clr-secondary);
-  padding: 2rem;
+  background-color: white;
+  background-image: url('/pattern.webp');
+
+}
+
+body.lock {
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.layout {
+  padding: 1rem;
+  max-width: 70rem;
+  margin: auto;
+
+  @include mediaqueries.sm {
+    padding: 2rem;
+  }
 }
 
 .visually-hidden {
@@ -46,6 +63,7 @@ body {
 }
 
 button,
+input,
 textarea {
   font-family: inherit;
   font-size: inherit;

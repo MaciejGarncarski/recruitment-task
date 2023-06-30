@@ -1,14 +1,11 @@
-import { Outlet } from "react-router-dom";
-
 import { AddStreamer } from "@/components/add-streamer/add-streamer";
-import { Header } from "@/components/header/header";
+import { StreamerList } from "@/components/streamer-list/streamer-list";
 
 export const Root = () => {
   return (
     <>
-      <Header />
       <AddStreamer />
-      <Outlet />
+      <StreamerList />
     </>
   );
 };

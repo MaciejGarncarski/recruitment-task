@@ -6,7 +6,7 @@ import styles from "./button.module.scss";
 type Props = {
   text: string;
   type: "submit" | "button" | "reset";
-  onClick?: () => void;
+  onClick?: (ev: React.MouseEvent<Element, MouseEvent>) => void;
   icon?: ReactNode;
   iconOnly?: boolean;
   variant: "primary" | "secondary";

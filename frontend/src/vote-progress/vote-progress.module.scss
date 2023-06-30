@@ -1,0 +1,36 @@
+@use '/src/styles/mediaqueries.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    max-width: 15rem;
+    gap: 0.5rem;
+
+    @include mediaqueries.xl {
+        gap: 1rem;
+        min-width: 15rem;
+        max-width: 20rem;
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.progressContainer {
+    height: 0.75rem;
+    background-color: var(--clr-accent);
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid var(--clr-border);
+}
+
+.progress {
+    height: 100%;
+    width: 50%;
+    background-color: var(--clr-secondary);
+}

@@ -1,4 +1,19 @@
+@use '/src/styles/mediaqueries.scss';
+
 .header {
     text-align: center;
     margin-bottom: 1rem;
+
+    @include mediaqueries.xl {
+        margin-bottom: 2rem;
+    }
+}
+
+.heading {
+    font-size: 3rem;
+    line-height: 1.2;
+
+    @include mediaqueries.xl {
+        font-size: 4rem;
+    }
 }

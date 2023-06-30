@@ -1,0 +1,54 @@
+@use '/src/styles/mediaqueries.scss';
+
+.nav {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.record {
+    padding: 1.5rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr-secondary);
+    border: 1px solid var(--clr-border);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    max-width: 40rem;
+    margin: auto;
+    margin-top: 2rem;
+
+
+    @include mediaqueries.sm {
+        padding: 2rem;
+    }
+
+    @include mediaqueries.xl {
+        margin-top: 4rem;
+    }
+}
+
+.name {
+    margin-top: 1rem;
+
+    @include mediaqueries.xl {
+        margin-top: 2rem;
+    }
+}
+
+.platform {
+    margin-top: 1rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius);
+    background-color: var(--clr-accent);
+    color: var(--clr-secondary);
+    text-align: center;
+
+    @include mediaqueries.xl {
+        margin-top: 1.5rem;
+    }
+}

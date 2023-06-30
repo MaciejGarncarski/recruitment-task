@@ -9,7 +9,7 @@ import styles from "./textArea.module.scss";
 type Props = {
   label: string;
   error?: FieldError;
-  isDirty?: boolean;
+  isDirty: boolean;
 };
 
 export const TextArea = forwardRef<HTMLTextAreaElement, Props>(

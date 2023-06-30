@@ -10,7 +10,7 @@ type Props = {
   type: HTMLInputTypeAttribute;
   label: string;
   error?: FieldError;
-  isDirty?: boolean;
+  isDirty: boolean;
 };
 
 export const Input = forwardRef<HTMLInputElement, Props>(

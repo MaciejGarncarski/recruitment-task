@@ -1,0 +1,13 @@
+@use '/src/styles/mediaqueries.scss';
+
+.avatar {
+    border-radius: var(--radius);
+    width: 5rem;
+    height: 5rem;
+
+    @include mediaqueries.xl {
+        width: 8rem;
+        height: 8rem;
+    }
+
+}

@@ -4,7 +4,7 @@
     padding: 1em 0.75em;
     padding-top: 1.5em;
     box-shadow: var(--shadow);
-    border: 1px solid var(--clr-accent);
+    border: 1px solid var(--clr-border);
     background-color: var(--clr-secondary);
     border-radius: var(--radius);
 
@@ -13,9 +13,13 @@
     }
 }
 
+%labelActiveTransform {
+    transform: translate(0.75em, 0.15em);
+}
+
 %labelActive {
     &:focus+.label {
-        transform: translate(0.75em, 0.15em);
+        @extend %labelActiveTransform;
         font-size: 0.8em;
     }
 }

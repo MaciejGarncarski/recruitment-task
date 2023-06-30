@@ -1,24 +1,38 @@
 .button {
     padding: 0.65em 1em;
     border-radius: var(--radius);
-    background-color: var(--clr-button-primary);
     color: var(--clr-secondary);
+    background-color: var(--clr-accent);
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: var(--shadow);
     border: 1px solid transparent;
+    transition: all var(--transition);
+    transition-property: background-color, color;
 
     &:hover {
         cursor: pointer;
+        background-color: var(--clr-accent-lighter);
+    }
+
+    &:focus {
+        outline-offset: 6px;
+        background-color: var(--clr-accent-lighter);
+        outline-width: 5;
     }
 }
 
 .buttonSecondary {
-    background-color: var(--clr-button-secondary);
     color: var(--clr-primary);
     border-color: var(--clr-accent);
+    background-color: var(--clr-secondary);
+
+    &:hover,
+    &:focus {
+        color: var(--clr-secondary);
+    }
 }
 
 .icon {
