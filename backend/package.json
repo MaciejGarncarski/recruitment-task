@@ -9,9 +9,15 @@
     "lint": "eslint --fix --max-warnings=0 \"src/**/*.{js,ts}\"",
     "format": "prettier --write  \"**/*.{js,ts}\"",
     "lint-format": "yarn format && yarn lint",
+    "prepare": "cd .. && husky install backend/.husky",
     "dev": "yarn nodemon"
   },
+  "lint-staged": {
+    "src/*.{js,ts}": "yarn lint-format"
+  },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
     "@types/express": "^4.17.17",
     "@types/node": "^20.3.1",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
@@ -21,6 +27,8 @@
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
     "prisma": "^4.16.1",
