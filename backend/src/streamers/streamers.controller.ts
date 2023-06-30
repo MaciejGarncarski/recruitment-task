@@ -17,9 +17,11 @@ import { httpCodes } from "../consts/http-codes";
 import { getZodErrorMessage } from "../utils/error";
 
 export const createStreamerHandler = async (
-  { body }: Request,
+  { body, app }: Request,
   res: Response
 ) => {
+  const io: Socket = app.get("io");
+
   const requestData = streamerDataSchema.safeParse(body);
 
   if (!requestData.success) {
@@ -30,6 +32,8 @@ export const createStreamerHandler = async (
 
   try {
     await createNewStreamer(requestData.data);
+    io.emit("new streamer");
+
     return res.status(httpCodes.RESOURCE_CREATED).send("new streamer added");
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {

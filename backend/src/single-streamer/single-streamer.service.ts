@@ -17,7 +17,7 @@ export const getStreamer = async ({ streamerId }: GetSingleStreamerInput) => {
 
   const downVotes = await db.vote.count({
     where: {
-      type: "upvote",
+      type: "downvote",
       streamer_id: streamerId
     }
   });

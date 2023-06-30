@@ -1,5 +1,15 @@
 import { z } from "zod";
 
+export const platformSchema = z.union([
+  z.literal("YouTube", {
+    errorMap: () => ({ message: "Please choose platform" })
+  }),
+  z.literal("Twitch"),
+  z.literal("Kick"),
+  z.literal("Rumble"),
+  z.literal("TikTok")
+]);
+
 export const streamerDataSchema = z.object({
   name: z
     .string()
@@ -7,15 +17,9 @@ export const streamerDataSchema = z.object({
     .max(25, { message: "Name is too long." }),
   description: z
     .string()
-    .min(0)
+    .min(1)
     .max(250, { message: "Description is too long." }),
-  platform: z.union([
-    z.literal("youtube"),
-    z.literal("twitch"),
-    z.literal("kick"),
-    z.literal("rumble"),
-    z.literal("tiktok")
-  ])
+  platform: platformSchema
 });
 
 export type Streamer = z.infer<typeof streamerDataSchema>;

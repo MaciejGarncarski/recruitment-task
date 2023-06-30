@@ -21,16 +21,23 @@ const STREAMERS_PER_PAGE = 10;
 
 export const getStreamersList = async ({ currentPage }: GetStreamersInput) => {
   const streamersCount = await db.streamer.count();
-  const maxPages = Math.ceil(streamersCount / STREAMERS_PER_PAGE) - 1;
+  const maxPages = Math.ceil(streamersCount / STREAMERS_PER_PAGE);
   const streamersData = await db.streamer.findMany({
-    skip: currentPage * STREAMERS_PER_PAGE,
-    take: STREAMERS_PER_PAGE
+    skip: (currentPage - 1) * STREAMERS_PER_PAGE,
+    take: STREAMERS_PER_PAGE,
+    select: {
+      name: true,
+      platform: true,
+      streamer_id: true
+    },
+    orderBy: { streamer_id: "desc" }
   });
 
   return {
     streamersData,
     maxPages,
-    streamersCount
+    streamersCount,
+    currentPage
   };
 };
 

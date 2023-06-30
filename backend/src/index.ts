@@ -1,3 +1,4 @@
+import cors from "cors";
 import dotenv from "dotenv";
 import type { Express } from "express";
 import express from "express";
@@ -13,6 +14,11 @@ const app: Express = express();
 const port = process.env.PORT || 8080;
 
 app.use(helmet());
+app.use(
+  cors({
+    origin: "*"
+  })
+);
 app.use(express.json());
 
 app.use("/streamers", streamersRouter);
