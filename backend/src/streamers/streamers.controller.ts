@@ -110,7 +110,7 @@ export const voteHandler = async (
 
 const ONE_HOUR = 60 * 60 * 1000;
 
-const ADD_STREAMER_MAX_REQUESTS = 2;
+const ADD_STREAMER_MAX_REQUESTS = 10;
 export const rateLimitAddStreamer = rateLimit({
   windowMs: ONE_HOUR,
   max: ADD_STREAMER_MAX_REQUESTS,
