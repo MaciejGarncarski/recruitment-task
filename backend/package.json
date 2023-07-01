@@ -13,7 +13,7 @@
     "dev": "yarn nodemon"
   },
   "lint-staged": {
-    "src/*.{js,ts}": "yarn lint-format"
+    "*.{js,ts}": "yarn lint-format"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.6",
