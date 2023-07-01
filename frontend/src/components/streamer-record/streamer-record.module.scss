@@ -18,7 +18,7 @@
     border: 1px solid var(--clr-border);
     box-shadow: var(--shadow);
     border-radius: var(--radius);
-    max-width: 40rem;
+    max-width: 35rem;
     margin: auto;
     margin-top: 2rem;
 
@@ -29,6 +29,7 @@
 
     @include mediaqueries.xl {
         margin-top: 4rem;
+        padding: 4rem;
     }
 }
 
@@ -38,6 +39,12 @@
     @include mediaqueries.xl {
         margin-top: 2rem;
     }
+}
+
+.description {
+    max-width: 100%;
+    text-align: center;
+    word-wrap: break-word;
 }
 
 .platform {

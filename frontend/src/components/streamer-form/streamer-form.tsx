@@ -1,6 +1,5 @@
 import { AxiosError } from "axios";
 import { motion } from "framer-motion";
-import debounce from "lodash.debounce";
 import { Check, Trash, X } from "lucide-react";
 
 import { Button } from "@/components/button/button";
@@ -31,15 +30,13 @@ export const StreamerForm = ({ closeForm }: Props) => {
     handleSubmit
   } = useStreamerForm();
 
-  const { mutate: addNewStreamer, error } = useAddNewStreamer();
+  const { mutate: addNewStreamer, error: addNewStreamerError } =
+    useAddNewStreamer();
 
-  const errorAxios = error instanceof AxiosError;
+  const isAxiosError = addNewStreamerError instanceof AxiosError;
 
   const onSubmit = handleSubmit((streamerData) => {
-    return debounce(
-      () => addNewStreamer(streamerData, { onSuccess: closeForm }),
-      500
-    );
+    addNewStreamer(streamerData, { onSuccess: closeForm });
   });
 
   return (
@@ -82,8 +79,10 @@ export const StreamerForm = ({ closeForm }: Props) => {
           isDirty={isFieldDirty("description")}
           {...register("description")}
         />
-        {errorAxios && error.response?.status === 409 && (
-          <p className={styles.submitError}>{error.response.data}</p>
+        {isAxiosError && addNewStreamerError.response?.status === 409 && (
+          <p className={styles.submitError}>
+            {addNewStreamerError.response.data}
+          </p>
         )}
         <div className={styles.buttons}>
           <Button

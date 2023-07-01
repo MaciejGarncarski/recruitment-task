@@ -13,7 +13,7 @@
     "lint-format": "yarn format && yarn lint"
   },
   "lint-staged": {
-    "src/*.{js,ts,jsx,tsx}": "yarn lint-format"
+    "*.{js,ts,jsx,tsx}": "yarn lint-format"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.0.3",

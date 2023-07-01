@@ -47,7 +47,7 @@ export const StreamerRecord = () => {
         className={styles.record}>
         <Avatar />
         <h2 className={styles.name}>{name}</h2>
-        <p>{description}</p>
+        <p className={styles.description}>{description}</p>
         <p className={clsx(styles.platform, styles[platform.toLowerCase()])}>
           Streaming on {platform}
         </p>

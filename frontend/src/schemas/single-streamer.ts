@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { platformSchema } from "@/components/streamer-form/use-streamer-form";
+import { platformSchema } from "@/components/streamer-form/streamer-form.data";
 
 export const getSingleStreamerInputSchema = z.object({
   streamerId: z.coerce

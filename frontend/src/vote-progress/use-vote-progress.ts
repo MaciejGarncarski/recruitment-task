@@ -12,6 +12,8 @@ type VoteProgress = {
   streamerId: number;
 };
 
+const VOTE_DEBOUNCE_TIMEOUT = 300;
+
 export const useVoteProgress = ({
   upVotes,
   downVotes,
@@ -22,12 +24,12 @@ export const useVoteProgress = ({
 
   const handleUpVote = debounce(
     () => mutate({ streamerId, type: "upvote" }),
-    300
+    VOTE_DEBOUNCE_TIMEOUT
   );
 
   const handleDownVote = debounce(
     () => mutate({ streamerId, type: "downvote" }),
-    300
+    VOTE_DEBOUNCE_TIMEOUT
   );
 
   const voteSum = upVotes + downVotes;

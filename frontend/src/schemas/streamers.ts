@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { platformSchema } from "@/components/streamer-form/use-streamer-form";
+import { platformSchema } from "@/components/streamer-form/streamer-form.data";
 
 const streamerListSchema = z.object({
   streamer_id: z.number(),
