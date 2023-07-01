@@ -15,6 +15,7 @@ import {
 import { ALREADY_EXISTS, STREAMER_NOT_FOUND } from "../consts/error-messages";
 import { httpCodes } from "../consts/http-codes";
 import { getZodErrorMessage } from "../utils/error";
+import { SOCKET_LIST_MSG, SOCKET_VOTE_MSG } from "../utils/socket";
 
 export const createStreamerHandler = async (
   { body, app }: Request,
@@ -32,7 +33,7 @@ export const createStreamerHandler = async (
 
   try {
     await createNewStreamer(requestData.data);
-    io.emit("new streamer");
+    io.emit(SOCKET_LIST_MSG);
 
     return res.status(httpCodes.RESOURCE_CREATED).send("new streamer added");
   } catch (error) {
@@ -91,7 +92,7 @@ export const voteHandler = async (
     }
 
     await createVote({ streamerId, type });
-    io.emit("vote", streamerId);
+    io.emit(SOCKET_VOTE_MSG, streamerId);
 
     return res
       .status(httpCodes.RESOURCE_CREATED)
