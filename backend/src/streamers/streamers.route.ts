@@ -3,11 +3,13 @@ import express from "express";
 import {
   createStreamerHandler,
   getStreamersListHandler,
+  rateLimitAddStreamer,
+  rateLimitAddVote,
   voteHandler
 } from "./streamers.controller";
 
 export const streamersRouter = express.Router();
 
-streamersRouter.post("/", createStreamerHandler);
+streamersRouter.post("/", rateLimitAddStreamer, createStreamerHandler);
 streamersRouter.get("/", getStreamersListHandler);
-streamersRouter.put("/:streamerId/vote", voteHandler);
+streamersRouter.put("/:streamerId/vote", rateLimitAddVote, voteHandler);

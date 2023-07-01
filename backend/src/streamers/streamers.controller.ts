@@ -1,5 +1,6 @@
 import { Prisma } from "@prisma/client";
 import type { Request, Response } from "express";
+import rateLimit from "express-rate-limit";
 import type { Socket } from "socket.io";
 
 import {
@@ -106,3 +107,23 @@ export const voteHandler = async (
     return res.status(httpCodes.BAD_REQUEST).send(`Bad request`);
   }
 };
+
+const ONE_HOUR = 60 * 60 * 1000;
+
+const ADD_STREAMER_MAX_REQUESTS = 2;
+export const rateLimitAddStreamer = rateLimit({
+  windowMs: ONE_HOUR,
+  max: ADD_STREAMER_MAX_REQUESTS,
+  message: `You have exceeded the ${ADD_STREAMER_MAX_REQUESTS} requests in hour limit!`,
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
+const ADD_VOTE_MAX_REQUESTS = 50;
+export const rateLimitAddVote = rateLimit({
+  windowMs: ONE_HOUR,
+  max: ADD_VOTE_MAX_REQUESTS,
+  message: `You have exceeded the ${ADD_VOTE_MAX_REQUESTS} requests in hour limit!`,
+  standardHeaders: true,
+  legacyHeaders: false
+});
