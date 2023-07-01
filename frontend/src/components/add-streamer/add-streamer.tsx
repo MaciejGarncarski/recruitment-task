@@ -37,11 +37,11 @@ export const AddStreamer = () => {
         onClick={openForm}
       />
 
-      <AnimatePresence mode="wait">
-        <div className={styles.overlay}>
+      <div className={styles.overlay}>
+        <AnimatePresence mode="wait">
           {isFormOpen && <StreamerForm closeForm={closeForm} />}
-        </div>
-      </AnimatePresence>
+        </AnimatePresence>
+      </div>
     </main>
   );
 };

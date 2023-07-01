@@ -5,7 +5,6 @@ import { addNewStreamer } from "@/services/add-new-streamer";
 
 export const useAddNewStreamer = () => {
   return useMutation({
-    onSuccess: () => console.log("created"),
     mutationFn: (streamerData: SingleStreamer) => addNewStreamer(streamerData)
   });
 };

@@ -8,7 +8,7 @@ export const listVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15
+      staggerChildren: 0.1
     }
   }
 };

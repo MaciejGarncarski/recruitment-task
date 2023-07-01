@@ -32,7 +32,7 @@ export type FormValues = z.infer<typeof formSchema>;
 export const useStreamerForm = () => {
   const {
     register,
-    formState: { errors, defaultValues },
+    formState: { errors, defaultValues, isDirty },
     reset,
     watch,
     handleSubmit
@@ -65,6 +65,7 @@ export const useStreamerForm = () => {
     isFieldDirty,
     handleReset,
     register,
-    handleSubmit
+    handleSubmit,
+    isDirty
   };
 };

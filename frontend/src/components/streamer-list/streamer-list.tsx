@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -13,22 +14,29 @@ import { useStreamerList } from "@/components/streamer-list/use-streamer-list";
 import styles from "./streamer-list.module.scss";
 
 export const StreamerList = () => {
-  const { data, isError, isLoading, listRef } = useStreamerList();
+  const { data, isError, isLoading, ref } = useStreamerList();
 
-  if (isLoading || !data) {
+  if (isLoading) {
     return <Loader />;
   }
 
-  if (isError) {
+  if (isError || !data) {
     return (
       <Error errorMessage="Cannot fetch streamer list. Check your internet connection and try again later." />
+    );
+  }
+
+  if (data.pages[0].streamersCount === 0) {
+    return (
+      <p className={clsx(styles.emptyMessage, styles.container)}>
+        Streamer list is empty.
+      </p>
     );
   }
 
   return (
     <section className={styles.container}>
       <motion.ul
-        ref={listRef}
         variants={listVariants}
         initial="hidden"
         animate="visible"
@@ -52,6 +60,7 @@ export const StreamerList = () => {
           });
         })}
       </motion.ul>
+      <div ref={ref}></div>
     </section>
   );
 };

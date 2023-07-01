@@ -6,8 +6,7 @@ export const variants: Variants = {
     top: "60%"
   },
   exit: {
-    opacity: 0,
-    top: "50%"
+    opacity: 0
   },
   visible: {
     opacity: 1,

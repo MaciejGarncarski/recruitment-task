@@ -9,6 +9,7 @@ type Props = {
   onClick?: (ev: React.MouseEvent<Element, MouseEvent>) => void;
   icon?: ReactNode;
   iconOnly?: boolean;
+  disabled?: boolean;
   variant: "primary" | "secondary";
 };
 
@@ -16,6 +17,7 @@ export const Button = ({
   text,
   type,
   onClick,
+  disabled,
   icon,
   iconOnly,
   variant
@@ -24,6 +26,7 @@ export const Button = ({
     <button
       type={type}
       onClick={onClick}
+      disabled={disabled}
       className={clsx(
         variant === "secondary" && styles.buttonSecondary,
         styles.button

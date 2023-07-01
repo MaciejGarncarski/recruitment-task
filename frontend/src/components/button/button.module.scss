@@ -12,7 +12,7 @@
     transition: all var(--transition);
     transition-property: background-color, color;
 
-    &:hover {
+    &:not(:disabled):hover {
         cursor: pointer;
         background-color: var(--clr-accent-lighter);
     }
@@ -21,6 +21,12 @@
         outline-offset: 6px;
         background-color: var(--clr-accent-lighter);
         outline-width: 5;
+
+    }
+
+
+    &:disabled {
+        opacity: 0.75;
     }
 }
 
@@ -29,7 +35,7 @@
     border-color: var(--clr-accent);
     background-color: var(--clr-secondary);
 
-    &:hover,
+    &:not(:disabled):hover,
     &:focus {
         color: var(--clr-secondary);
     }

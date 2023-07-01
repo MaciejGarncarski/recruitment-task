@@ -1,4 +1,6 @@
+import { AxiosError } from "axios";
 import { motion } from "framer-motion";
+import debounce from "lodash.debounce";
 import { Check, Trash, X } from "lucide-react";
 
 import { Button } from "@/components/button/button";
@@ -19,11 +21,26 @@ type Props = {
 };
 
 export const StreamerForm = ({ closeForm }: Props) => {
-  const { errors, register, handleReset, watch, isFieldDirty, handleSubmit } =
-    useStreamerForm();
+  const {
+    errors,
+    isDirty,
+    register,
+    handleReset,
+    watch,
+    isFieldDirty,
+    handleSubmit
+  } = useStreamerForm();
 
-  const { mutate: addNewStreamer } = useAddNewStreamer();
-  const onSubmit = handleSubmit((streamerData) => addNewStreamer(streamerData));
+  const { mutate: addNewStreamer, error } = useAddNewStreamer();
+
+  const errorAxios = error instanceof AxiosError;
+
+  const onSubmit = handleSubmit((streamerData) => {
+    return debounce(
+      () => addNewStreamer(streamerData, { onSuccess: closeForm }),
+      500
+    );
+  });
 
   return (
     <motion.div
@@ -65,6 +82,9 @@ export const StreamerForm = ({ closeForm }: Props) => {
           isDirty={isFieldDirty("description")}
           {...register("description")}
         />
+        {errorAxios && error.response?.status === 409 && (
+          <p className={styles.submitError}>{error.response.data}</p>
+        )}
         <div className={styles.buttons}>
           <Button
             variant="secondary"
@@ -77,6 +97,7 @@ export const StreamerForm = ({ closeForm }: Props) => {
             variant="primary"
             text="Submit"
             type="submit"
+            disabled={!isDirty}
             icon={<Check />}
           />
         </div>
