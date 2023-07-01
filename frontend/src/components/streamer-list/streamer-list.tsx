@@ -14,7 +14,8 @@ import { useStreamerList } from "@/components/streamer-list/use-streamer-list";
 import styles from "./streamer-list.module.scss";
 
 export const StreamerList = () => {
-  const { data, isError, isLoading, ref } = useStreamerList();
+  const { data, isError, isLoading, ref, isFetchingNextPage } =
+    useStreamerList();
 
   if (isLoading) {
     return <Loader />;
@@ -60,6 +61,7 @@ export const StreamerList = () => {
           });
         })}
       </motion.ul>
+      {isFetchingNextPage && <Loader />}
       <div ref={ref}></div>
     </section>
   );

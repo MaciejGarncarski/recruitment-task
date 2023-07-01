@@ -12,7 +12,7 @@ type VoteProgress = {
   streamerId: number;
 };
 
-const VOTE_DEBOUNCE_TIMEOUT = 300;
+const VOTE_DEBOUNCE_TIMEOUT = 400;
 
 export const useVoteProgress = ({
   upVotes,

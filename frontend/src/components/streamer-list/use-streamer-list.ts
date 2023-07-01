@@ -7,10 +7,16 @@ import { QUERY_STREAMER_LIST } from "@/utils/query-keys";
 import { socket, SOCKET_LIST_MSG } from "@/utils/socket";
 
 export const useStreamerList = () => {
-  const { ref, inView } = useInView({ rootMargin: "200px" });
+  const { ref, inView } = useInView({ rootMargin: "100px" });
 
-  const { data, hasNextPage, isLoading, isError, fetchNextPage } =
-    useInfiniteStreamers();
+  const {
+    data,
+    hasNextPage,
+    isLoading,
+    isError,
+    fetchNextPage,
+    isFetchingNextPage
+  } = useInfiniteStreamers();
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -25,5 +31,5 @@ export const useStreamerList = () => {
     });
   }, [queryClient]);
 
-  return { data, isLoading, isError, ref, fetchNextPage };
+  return { isFetchingNextPage, data, isLoading, isError, ref, fetchNextPage };
 };

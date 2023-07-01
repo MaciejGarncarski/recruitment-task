@@ -25,7 +25,12 @@ export const StreamerRecord = () => {
 
   if (isError) {
     return (
-      <Error errorMessage="Cannot fetch this streamer. Check your internet connection and try again later." />
+      <>
+        <div className={styles.nav}>
+          <Nav />
+        </div>
+        <Error errorMessage="Cannot fetch this streamer. Check your internet connection and try again later." />
+      </>
     );
   }
 
