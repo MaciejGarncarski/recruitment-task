@@ -37,13 +37,24 @@ export const useVoteProgress = ({
   const progressWithPercent = `${progress}%`;
 
   useEffect(() => {
-    socket.on(SOCKET_VOTE_MSG, (id) => {
+    const onVoteMessage = (id: unknown) => {
       if (typeof id !== "number") {
         return;
       }
       queryClient.invalidateQueries([QUERY_STREAMER, id]);
-    });
+    };
+
+    socket.on(SOCKET_VOTE_MSG, onVoteMessage);
+
+    return () => {
+      socket.off(SOCKET_VOTE_MSG, onVoteMessage);
+    };
   }, [queryClient]);
 
-  return { handleDownVote, handleUpVote, progressWithPercent, progress };
+  return {
+    handleDownVote,
+    handleUpVote,
+    progressWithPercent,
+    progress
+  };
 };

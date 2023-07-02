@@ -42,7 +42,8 @@ export const VoteProgres = ({ downVotes, upVotes, streamerId }: Props) => {
         </div>
         <motion.div
           className={styles.progress}
-          animate={{ width: progressWithPercent }}></motion.div>
+          animate={{ width: progressWithPercent }}
+        />
       </div>
     </div>
   );

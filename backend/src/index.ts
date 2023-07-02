@@ -29,5 +29,4 @@ const server = app.listen(port, () => {
 });
 
 const io = new Server(server);
-
 app.set("io", io);
