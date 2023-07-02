@@ -1,9 +1,9 @@
-import type { Variants } from "framer-motion";
 import { AnimatePresence, motion } from "framer-motion";
 import { AlertCircle, Check, X } from "lucide-react";
 
 import { Button } from "@/components/button/button";
 import { ModalOverlay } from "@/components/modal-overlay/modal-overlay";
+import { variants } from "@/confirmation-modal/confirmation-modal.data";
 
 import styles from "./confirmation-modal.module.scss";
 
@@ -12,19 +12,6 @@ type Props = {
   close: () => void;
   onConfirm: () => void;
   headingText: string;
-};
-
-const variants: Variants = {
-  hidden: {
-    opacity: 0
-  },
-  visible: {
-    opacity: 1
-  },
-  exit: {
-    opacity: 0,
-    transform: "translate(-50%, -40%) scale(0.5)"
-  }
 };
 
 export const ConfirmationModal = ({
