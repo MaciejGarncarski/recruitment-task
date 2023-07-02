@@ -10,6 +10,8 @@ export const platformSchema = z.union([
   z.literal("TikTok")
 ]);
 
+export const DESCRIPTION_MAX_LENGTH = 1000;
+
 export const streamerDataSchema = z.object({
   name: z
     .string()
@@ -17,8 +19,8 @@ export const streamerDataSchema = z.object({
     .max(25, { message: "Name is too long." }),
   description: z
     .string()
-    .min(1)
-    .max(250, { message: "Description is too long." }),
+    .min(1, { message: "Description is too short." })
+    .max(DESCRIPTION_MAX_LENGTH, { message: "Description is too long." }),
   platform: platformSchema
 });
 
