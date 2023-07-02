@@ -12,6 +12,8 @@ export type GetSingleStreamerInput = z.infer<
   typeof getSingleStreamerInputSchema
 >;
 
+export const DESCRIPTION_MAX_LENGTH = 1000;
+
 export const singleStreamerSchema = z.object({
   name: z
     .string()
@@ -19,8 +21,8 @@ export const singleStreamerSchema = z.object({
     .max(25, { message: "Name is too long." }),
   description: z
     .string()
-    .min(0)
-    .max(250, { message: "Description is too long." }),
+    .min(1, { message: "Description is too short." })
+    .max(DESCRIPTION_MAX_LENGTH, { message: "Description is too long." }),
   platform: platformSchema
 });
 

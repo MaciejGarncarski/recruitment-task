@@ -37,6 +37,7 @@
 
     &:not(:disabled):hover,
     &:focus {
+        background-color: var(--clr-accent-lighter);
         color: var(--clr-secondary);
     }
 }

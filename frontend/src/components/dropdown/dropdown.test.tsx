@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 import type { DropdownData } from "@/components/dropdown/dropdown";
 import { Dropdown } from "@/components/dropdown/dropdown";
@@ -9,9 +9,10 @@ const dropdownData = [
 ] satisfies Array<DropdownData>;
 
 describe("Dropdown component", () => {
-  it("should render component", () => {
+  it("should open on click and find input with passed data", () => {
     render(<Dropdown inputValue="" data={dropdownData} />);
-
-    expect(screen.getByRole("textbox")).toBeInTheDocument();
+    const button = screen.getByRole("button");
+    fireEvent.click(button);
+    expect(screen.getByLabelText("test")).toBeInTheDocument();
   });
 });

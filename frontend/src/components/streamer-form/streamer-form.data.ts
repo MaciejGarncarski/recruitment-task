@@ -13,20 +13,6 @@ export const platformSchema = z.union([
 
 export type Platform = z.infer<typeof platformSchema>;
 
-export const formSchema = z.object({
-  name: z
-    .string()
-    .min(2, { message: "Name is too short" })
-    .max(30, { message: "Name is too long" }),
-  description: z
-    .string()
-    .min(1, { message: "Description is too short" })
-    .max(250, { message: "Description is too long" }),
-  platform: platformSchema
-});
-
-export type FormValues = z.infer<typeof formSchema>;
-
 export const variants: Variants = {
   hidden: {
     opacity: 0,

@@ -2,20 +2,25 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { MouseEvent } from "react";
 import { useForm } from "react-hook-form";
 
+import { useAddNewStreamer } from "@/hooks/use-add-new-streamer";
 import {
-  formSchema,
-  type FormValues
-} from "@/components/streamer-form/streamer-form.data";
+  type SingleStreamer,
+  singleStreamerSchema
+} from "@/schemas/single-streamer";
 
-export const useStreamerForm = () => {
+type Args = {
+  closeForm: () => void;
+};
+
+export const useStreamerForm = ({ closeForm }: Args) => {
   const {
     register,
     formState: { errors, defaultValues, isDirty },
     reset,
     watch,
     handleSubmit
-  } = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+  } = useForm<SingleStreamer>({
+    resolver: zodResolver(singleStreamerSchema),
     mode: "onBlur",
     defaultValues: {
       name: "",
@@ -24,7 +29,7 @@ export const useStreamerForm = () => {
     }
   });
 
-  const isFieldDirty = (key: keyof FormValues) => {
+  const isFieldDirty = (key: keyof SingleStreamer) => {
     if (!defaultValues) {
       return false;
     }
@@ -37,6 +42,13 @@ export const useStreamerForm = () => {
     reset();
   };
 
+  const { mutate: addNewStreamer, error: addNewStreamerError } =
+    useAddNewStreamer();
+
+  const onSubmit = handleSubmit((streamerData) => {
+    addNewStreamer(streamerData, { onSuccess: closeForm });
+  });
+
   return {
     watch,
     errors,
@@ -44,6 +56,8 @@ export const useStreamerForm = () => {
     handleReset,
     register,
     handleSubmit,
-    isDirty
+    isDirty,
+    addNewStreamerError,
+    onSubmit
   };
 };

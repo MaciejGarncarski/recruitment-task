@@ -53,7 +53,7 @@ export const StreamerList = () => {
                     height={75}
                     className={styles.image}
                   />
-                  <span>{name}</span>
+                  <span className={styles.name}>{name}</span>
                   <ExternalLink className={styles.icon} />
                 </Link>
               </motion.li>

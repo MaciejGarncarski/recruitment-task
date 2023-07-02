@@ -3,6 +3,7 @@ import { forwardRef, useId } from "react";
 import type { FieldError } from "react-hook-form";
 
 import { InputError } from "@/components/inputError/inputError";
+import { DESCRIPTION_MAX_LENGTH } from "@/schemas/single-streamer";
 
 import styles from "./textArea.module.scss";
 
@@ -10,11 +11,15 @@ type Props = {
   label: string;
   error?: FieldError;
   isDirty: boolean;
+  value: string;
 };
 
 export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
-  ({ label, error, isDirty, ...rest }, ref) => {
+  ({ label, error, isDirty, value, ...rest }, ref) => {
     const inputId = useId();
+
+    const length = `${value.length} / ${DESCRIPTION_MAX_LENGTH}`;
+    const isLengthValid = value.length >= DESCRIPTION_MAX_LENGTH;
 
     return (
       <div className={styles.container}>
@@ -31,7 +36,18 @@ export const TextArea = forwardRef<HTMLTextAreaElement, Props>(
             {label}
           </label>
         </div>
-        <InputError message={error?.message} />
+        <div className={styles.info}>
+          <InputError message={error?.message} />
+          {isDirty && (
+            <span
+              className={clsx(
+                isLengthValid && styles.lengthError,
+                styles.length
+              )}>
+              {length}
+            </span>
+          )}
+        </div>
       </div>
     );
   }

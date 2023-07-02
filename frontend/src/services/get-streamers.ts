@@ -1,4 +1,4 @@
-import { apiClient } from "@/apiClient/apiClient";
+import { apiClient } from "@/api-client/api-client";
 import { streamersResponseSchema } from "@/schemas/streamers";
 
 type CurrentPage = {

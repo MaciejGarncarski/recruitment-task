@@ -4,6 +4,7 @@
     border-radius: var(--radius);
     width: 5rem;
     height: 5rem;
+    box-shadow: var(--shadow);
 
     @include mediaqueries.xl {
         width: 8rem;

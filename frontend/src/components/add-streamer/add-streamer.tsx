@@ -1,10 +1,8 @@
-import { AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/button/button";
 import { StreamerForm } from "@/components/streamer-form/streamer-form";
-import { useClickOutside } from "@/hooks/use-click-outside";
 
 import styles from "./add-streamer.module.scss";
 
@@ -25,10 +23,8 @@ export const AddStreamer = () => {
     document.body.classList.add("lock");
   };
 
-  const { ref } = useClickOutside(closeForm);
-
   return (
-    <main ref={ref} className={styles.addStreamer}>
+    <main className={styles.addStreamer}>
       <Button
         icon={<Plus />}
         variant="primary"
@@ -36,12 +32,7 @@ export const AddStreamer = () => {
         type="button"
         onClick={openForm}
       />
-
-      <div className={styles.overlay}>
-        <AnimatePresence mode="wait">
-          {isFormOpen && <StreamerForm closeForm={closeForm} />}
-        </AnimatePresence>
-      </div>
+      <StreamerForm closeForm={closeForm} isOpen={isFormOpen} />
     </main>
   );
 };

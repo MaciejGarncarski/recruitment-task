@@ -8,6 +8,7 @@ import { Loader } from "@/components/loader/loader";
 import { Nav } from "@/components/nav/nav";
 import { containerVariants } from "@/components/streamer-record/streamer-record.data";
 import { useSingleStreamer } from "@/hooks/use-single-streamer";
+import { getPlatformLogo } from "@/utils/get-platform-logo";
 import { VoteProgres } from "@/vote-progress/vote-progress";
 
 import styles from "./streamer-record.module.scss";
@@ -40,6 +41,8 @@ export const StreamerRecord = () => {
     upVotes
   } = data;
 
+  const logo = getPlatformLogo(platform);
+
   return (
     <>
       <div className={styles.nav}>
@@ -53,9 +56,16 @@ export const StreamerRecord = () => {
         <Avatar />
         <h2 className={styles.name}>{name}</h2>
         <p className={styles.description}>{description}</p>
-        <p className={clsx(styles.platform, styles[platform.toLowerCase()])}>
-          Streaming on {platform}
-        </p>
+        <figure
+          className={clsx(styles.platform, styles[platform.toLowerCase()])}>
+          <img
+            src={logo}
+            alt={platform}
+            width={100}
+            height={50}
+            className={styles.platformLogo}
+          />
+        </figure>
 
         <VoteProgres
           downVotes={downVotes}

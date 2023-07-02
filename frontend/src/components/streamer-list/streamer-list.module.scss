@@ -60,6 +60,17 @@
     border-radius: var(--radius);
 }
 
+.name {
+    max-width: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include mediaqueries.xl {
+        max-width: 20rem;
+    }
+}
+
 .icon {
     margin-left: auto;
+    flex-shrink: 0;
 }

@@ -21,6 +21,7 @@
     max-width: 35rem;
     margin: auto;
     margin-top: 2rem;
+    text-align: center;
 
 
     @include mediaqueries.sm {
@@ -43,19 +44,31 @@
 
 .description {
     max-width: 100%;
-    text-align: center;
     word-wrap: break-word;
 }
 
 .platform {
     margin-top: 1rem;
-    padding: 0.4rem 0.8rem;
+    padding: 0.5rem 1.5rem;
     border-radius: var(--radius);
-    background-color: var(--clr-accent);
-    color: var(--clr-secondary);
+    border: 1px solid var(--clr-accent);
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    box-shadow: 0 5px 0 0 var(--clr-accent);
+    align-items: center;
+    gap: 1rem;
+    color: var(--clr-primary);
     text-align: center;
 
     @include mediaqueries.xl {
         margin-top: 1.5rem;
     }
+
+}
+
+.platformLogo {
+    object-fit: contain;
+    max-height: 2rem;
+    width: auto;
 }
