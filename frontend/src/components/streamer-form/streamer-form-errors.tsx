@@ -14,13 +14,11 @@ export const StreamerFormErrors = ({ error, status }: Props) => {
     return null;
   }
 
-  return (
-    <>
-      <FormError status={status === 409} message={error.message} />
-      <FormError
-        status={status === 429}
-        message={"Rate limit exceeded. Wait a few minutes and try again."}
-      />
-    </>
-  );
+  if (status === 429) {
+    <FormError
+      message={"Rate limit exceeded. Wait a few minutes and try again."}
+    />;
+  }
+
+  return <FormError message={error.message} />;
 };
